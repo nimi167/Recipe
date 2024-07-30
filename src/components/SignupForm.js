@@ -1,0 +1,234 @@
+import React, { useState } from 'react';
+import { FaRegEnvelope } from "react-icons/fa6";
+import { MdLockOutline } from "react-icons/md";
+import { Link, useNavigate } from 'react-router-dom';
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from "jwt-decode";
+export default function SignupForm() {
+    const BaseURL = process.env.REACT_APP_BASE_URL;
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        password: '',
+        repeatPassword: '',
+        agreedToTerms: false,
+    });
+
+    const navigate = useNavigate();
+
+    const handleChange = (e) => {
+        const { name, value, type, checked } = e.target;
+        setFormData({
+            ...formData,
+            [name]: type === 'checkbox' ? checked : value,
+        });
+    };
+
+    const handleSignup = async (e) => {
+        e.preventDefault();
+
+        // Check if all required fields are provided
+        const { name, email, password, repeatPassword } = formData;
+        if (!name || !email || !password || !repeatPassword) {
+            alert('Please fill in all fields and agree to terms.');
+            return;
+        }
+
+        // Check if passwords match
+        if (password !== repeatPassword) {
+            alert('Passwords do not match.');
+            return;
+        }
+
+        try {
+            const response = await fetch(`${BaseURL}/Signup`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                if (data.authToken) {
+                    console.log(data.authToken)
+                    const response = await fetch(`${BaseURL}/auth/Get/User`, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': data.authToken
+                        }
+                    });
+                    if (response.status === 200) {
+                        const data = await response.json();
+                        console.log(data.user._id)
+                        localStorage.setItem('userId', data.user._id);
+                    } else {
+                        alert(response.status)
+                    }
+                    localStorage.setItem('token', data.authToken);
+                    navigate('/');
+                    setFormData({
+                        name: '',
+                        email: '',
+                        password: '',
+                        repeatPassword: '',
+                        agreedToTerms: false,
+                    })
+                }
+            } else if (response.status === 400) {
+                alert('User with this email already exists.');
+            } else {
+                console.error('Error during signup:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error during signup:', error);
+            alert('An error occurred. Please try again later.');
+        }
+    };
+
+    return (
+        <>
+            <div className="col-lg-6 col-12 p-5 position-relative">
+                <div className="fs-3 fw-semibold">Want to Join our Family</div>
+                <form className='mx-2' onSubmit={handleSignup}>
+                    <div className="row border rounded-top mx-3 my-1 pt-1">
+                        <div className="col-1 text-end pe-0"><FaRegEnvelope className='colorGray' size={20} /></div>
+                        <div className="col-11 ps-0">
+                            <input
+                                type="text"
+                                placeholder='Enter Name'
+                                className='border-0 ms-3 w-75 py-1'
+                                name="name"
+                                value={formData.name}
+                                onChange={handleChange}
+                            />
+                        </div>
+                    </div>
+                    <div className="row border rounded-bottom border-top-0 mx-3 my-1 pt-1">
+                        <div className="col-1 text-end pe-0"><MdLockOutline className='colorGray' size={20} /></div>
+                        <div className="col-11 ps-0">
+                            <input
+                                type="email"
+                                placeholder='Enter Email'
+                                className='border-0 ms-3 w-75 py-1'
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                            />
+                        </div>
+                    </div>
+                    <div className="row border rounded-bottom border-top-0 mx-3 my-1 pt-1">
+                        <div className="col-1 text-end pe-0"><MdLockOutline className='colorGray' size={20} /></div>
+                        <div className="col-11 ps-0">
+                            <input
+                                type="password"
+                                placeholder='Enter Password'
+                                className='border-0 ms-3 w-75 py-1'
+                                name="password"
+                                value={formData.password}
+                                onChange={handleChange}
+                            />
+                        </div>
+                    </div>
+                    <div className="row border rounded-bottom border-top-0 mx-3 my-1 pt-1">
+                        <div className="col-1 text-end pe-0"><MdLockOutline className='colorGray' size={20} /></div>
+                        <div className="col-11 ps-0">
+                            <input
+                                type="password"
+                                placeholder='Repeat Password'
+                                className='border-0 ms-3 w-75 py-1'
+                                name="repeatPassword"
+                                value={formData.repeatPassword}
+                                onChange={handleChange}
+                            />
+                        </div>
+                    </div>
+                    <div className="fs-6 colorGray m-3 ">
+                        <input
+                            type="checkbox"
+                            className=''
+                            name="agreedToTerms"
+                            id="agreedToTerms"
+                            checked={formData.agreedToTerms}
+                            onChange={handleChange}
+                        />
+                        <span className='fs-small ps-1'> I agree to the term & policy </span>
+                    </div>
+                    <div className="fs-6 colorGray m-3 ">
+                        <button type="submit" className="btn bgRed colorWhite mx-1 boxShadowRed px-5 border-0">Sign Up</button>
+                    </div>
+                </form>
+                <div className="row d-flex justify-content-evenly">
+                    <div className="my-1 col-5 d-flex justify-content-center text-center rounded py-1 pointer fs-small">
+                        <GoogleLogin
+                            onSuccess={async (credentialResponse) => {
+                                try {
+                                    const decoded = jwtDecode(credentialResponse.credential);
+
+                                    // Prepare the registration data
+                                    const userData = {
+                                        name: decoded.name,
+                                        email: decoded.email,
+                                        password: "G-Auth",
+                                        repeatPassword: "G-Auth",
+                                        agreedToTerms: decoded.email_verified,
+                                    };
+
+                                    // Send the user data to the server
+                                    const response = await fetch(`${BaseURL}/Google/Signup`, {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                        },
+                                        body: JSON.stringify(userData),
+                                    });
+
+                                    if (response.ok) {
+                                        const data = await response.json();
+                                        if (data.authToken) {
+                                            const response = await fetch(`${BaseURL}/auth/Get/User`, {
+                                                method: 'GET',
+                                                headers: {
+                                                    'Content-Type': 'application/json',
+                                                    'Authorization': data.authToken
+                                                }
+                                            });
+                                            if (response.status === 200) {
+                                                const data = await response.json();
+                                                // console.log(data.user._id)
+                                                localStorage.setItem('userId', data.user._id);
+                                            }
+                                            localStorage.setItem('token', data.authToken);
+                                            navigate('/');
+                                            setFormData({
+                                                name: '',
+                                                email: '',
+                                                password: '',
+                                                repeatPassword: '',
+                                                agreedToTerms: false,
+                                            })
+                                        }
+                                    } else if (response.status === 400) {
+                                        alert('User Already Exists with this Email');
+                                    } else {
+                                        // Handle other error scenarios
+                                        console.error('Error during Google login:', response.statusText);
+                                    }
+                                } catch (error) {
+                                    console.error('Error during Google login:', error);
+                                    alert('An error occurred. Please try again later.');
+                                }
+                            }}
+                            onError={() => {
+                                console.log('Login Failed');
+                            }}
+                        />
+                    </div>
+                </div>
+                <div className="colorGray fs-small mx-3 my-2">Already have an account? <Link to="/login" className='colorRed'>Login</Link></div>
+            </div>
+        </>
+    );
+}

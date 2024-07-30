@@ -1,0 +1,592 @@
+:root {
+  --Brown1: #793E37;
+  --Brown2: #974E44;
+  --Brown3: #B55D51;
+  --Pink: #FFF0ED;
+
+  --Gray1: #4C4C4C;
+  --Gray2: #878787;
+  --Gray3: #A5A5A5;
+  --Gray4: #EBEBEB;
+
+  --White: #FFFFFF;
+  --Black: #000000;
+  --BoxShadow: #8080805e
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  text-decoration: none;
+}
+
+ul {
+  padding: 0;
+}
+
+ul li {
+  list-style: none;
+  color: var(--Black) !important;
+}
+
+.recipie {
+  border: 1px solid var(--Brown3);
+}
+
+.recipie:hover {
+  background-color: var(--Pink);
+}
+
+button:focus {
+  outline: none;
+  opacity: 1;
+}
+
+.colorBlack {
+  color: var(--Black);
+}
+
+.colorWhite {
+  color: var(--White);
+}
+
+.colorRed {
+  color: var(--Brown3);
+}
+
+.colorGray {
+  color: var(--Gray2);
+}
+
+.colorGray1 {
+  color: var(--Gray1);
+}
+
+.bgGray {
+  background-color: var(--Gray4);
+}
+
+.bgWhite {
+  background-color: var(--White);
+}
+
+.bgRed {
+  background-color: var(--Brown3);
+}
+
+.bgPink {
+  background-color: var(--Pink);
+}
+
+.boxShadowRed {
+  box-shadow: 0px 5px 10px var(--BoxShadow);
+}
+
+.BlogCardShadow {
+  box-shadow: 0px 5px 29px -5px var(--BoxShadow);
+}
+
+.borderRed {
+  border: 1px solid var(--Brown3);
+}
+
+.coloRed input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
+
+.btnTheme {
+  color: var(--White);
+  background-color: var(--Brown3);
+  box-shadow: 0px 5px 10px var(--BoxShadow);
+}
+
+input,
+select {
+  border: 1px solid #cac7c7;
+}
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.inputBtn {
+  border: 1px solid #a2a1a1;
+  color: var(--Black);
+  background-color: var(--Gray4);
+  /* padding: 30px 30px; */
+  height: 110px;
+  width: 130px;
+  border-radius: 8px;
+  font-size: 18px;
+}
+
+.inputBtn i {
+  color: var(--Brown3);
+  border-radius: 8px;
+  font-size: 25px;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.previewImage {
+  height: 200px;
+  width: 200px;
+}
+
+
+
+.ingredientList {
+  border: 1px solid #cac7c7;
+}
+
+.cameraIcon {
+  background-color: #ececec;
+  border-radius: 5px;
+  padding: 14px 24px;
+  font-size: 25px;
+}
+
+.BlackFoodDishImg {
+  height: 600px;
+}
+
+.shareRecipeImg {
+  height: 300px;
+}
+
+.CardImage {
+  height: 200px;
+  object-fit: cover;
+}
+
+.BlogImage {
+  height: 200px;
+  object-fit: cover;
+}
+
+
+.profileIcon {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.sectionMargin {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.cardRoundImg {
+  border-radius: 50%;
+  object-fit: cover;
+  height: 130px;
+  width: 130px;
+}
+
+.RecipeDetailImg {
+  width: 95%;
+}
+
+
+.PX-1 {
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+.PY-1 {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.fs-small {
+  font-size: 13px;
+}
+
+.fw-semiBold {
+  font-weight: 500;
+}
+
+.hr {
+  height: 5px;
+  background-color: #B55D51;
+  width: 100%;
+  opacity: 1;
+}
+
+
+
+.RecipeDetailSideImg {
+  width: 100%;
+}
+
+.BlogSideImg {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.BlogCardImg {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+}
+
+
+
+
+.iconContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.iconContainer>div {
+  flex: 0 0 auto;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+
+.iconContainer>div:last-child {
+  margin-right: 0;
+}
+
+.NavLogo {
+  font-size: 25px;
+}
+
+.nav-link {
+  color: gray;
+  text-decoration: none;
+}
+
+/* .nav-link.active {
+  color: red;
+} */
+
+.AboutUsImg {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+}
+
+.logoPosition {
+  position: absolute;
+  bottom: 7px;
+  right: 20px;
+}
+
+.BookmarkPosition {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+}
+
+.bordeBottom {
+  border-bottom: 1px solid red;
+}
+
+input:focus {
+  outline: none;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+
+.cardName {
+  font-size: 20px;
+}
+
+.headingText {
+  font-size: 24px;
+}
+
+.smallTxt {
+  font-size: 15px;
+}
+
+.PreviewImage {
+  width: 500px;
+  height: 200px;
+  margin: 5px;
+  object-fit: cover
+}
+
+
+.btn:hover {
+  border: 1px solid #B55D51;
+  color: black;
+}
+
+.btnHover {
+  border: 1px solid #b77f78;
+}
+
+.btnHover:hover {
+  border: 1px solid #9c4f45;
+  background-color: #B55D51;
+  color: white;
+}
+
+
+
+/* ChatComponent.css */
+
+.chat-container {
+  display: flex;
+  height: 85vh;
+}
+
+.user-list {
+  width: 25%;
+  background-color: #FFF0ED;
+  padding: 20px;
+}
+
+.user-list h2 {
+  margin-bottom: 10px;
+}
+
+.user-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.user-list li {
+  cursor: pointer;
+  padding: 10px;
+  margin-bottom: 5px;
+  background-color: #B55D51;
+  border-radius: 5px;
+}
+
+.chat-section {
+  flex: 1;
+  padding: 20px;
+}
+
+.chat-section h2 {
+  margin-bottom: 10px;
+}
+
+
+
+.chat-section {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.chat-history {
+  overflow-y: auto;
+  flex: 1;
+}
+
+
+.message-input {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 70%;
+}
+
+.message-input input {
+  flex: 1;
+  padding: 8px;
+  margin-right: 10px;
+  width: 100%;
+}
+
+.message-input button {
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+.message {
+  margin-bottom: 20px;
+}
+
+.chef {
+  text-align: left;
+}
+
+.chef span {
+  border: 1px solid tomato;
+  padding: 10px 35px 10px 20px;
+  background-color: #FFF0ED;
+  border-radius: 20px 20px 20px 0px;
+}
+
+.user {
+  text-align: right;
+}
+
+.user span {
+  border: 1px solid tomato;
+  background-color: #FFF0ED;
+  padding: 10px 35px 10px 20px;
+  border-radius: 20px 20px 0px 20px;
+}
+
+
+
+
+
+
+/* Media Query */
+@media only screen and (max-width: 1200px) {
+  .BlogCardImg {
+    height: 300px;
+  }
+
+  .headingText {
+    font-size: 21px;
+  }
+
+  .cardName {
+    font-size: 18px;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .CardImage {
+    height: 150px;
+    object-fit: cover;
+  }
+
+  .BlogCardImg {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .AboutUsImg {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+
+  .shareRecipeImg {
+    height: 200px;
+  }
+
+  .smallTxt {
+    font-size: 10px;
+  }
+
+  .headingText {
+    font-size: 18px;
+  }
+
+  .cardName {
+    font-size: 13px;
+  }
+
+  .RecipeDetailSideImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .CardImage {
+    height: 150px;
+    object-fit: cover;
+  }
+
+  .BlogSideImg {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .BlogCardImg {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+  }
+
+  .AboutUsImg {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+  }
+
+  .shareRecipeImg {
+    height: auto;
+  }
+
+  .cardName {
+    font-size: 18px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .CardImage {
+    height: 100px;
+    object-fit: cover;
+  }
+
+  .BlogSideImg {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .PreviewImage {
+    width: auto;
+    height: 200px;
+    margin: 5px;
+    object-fit: cover
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .RecipeDetailImg {
+    width: 100%;
+  }
+
+  .BlogCardImg {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+
+  .NavLogo {
+    font-size: 20px;
+  }
+
+  .AboutUsImg {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .cardName {
+    font-size: 10px;
+  }
+}
